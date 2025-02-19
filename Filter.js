@@ -48,16 +48,35 @@ console.log(numPar)
 console.log("mais complexo")
 
 const companies = [
-    { name: "Samsung", marketValeu: 50, CEO: "Kim Hyun Suk", foundeOn:1983},
-    { name: "Microsoft", marketValeu: 415, CEO: "Satya Nadella", foundeOn:1975 },
-    { name: "Intel", marketValeu: 117, CEO: "Brian Krzanich", foundeOn:1968 },
-    { name: "Facebook", marketValeu: 383, CEO: "Mark Zuckerberg", foundeOn:2004 },
-    { name: "Spotify", marketValeu: 50, CEO: "Daniel Ek", foundeOn:2006 },
-    { name: "Apple", marketValeu: 245, CEO: "Tim Cook", foundeOn:1976 }
+    { name: "Samsung", marketValeu: 50, CEO: "Kim Hyun Suk", foundedOn:1983},
+    { name: "Microsoft", marketValeu: 415, CEO: "Satya Nadella", foundedOn:1975 },
+    { name: "Intel", marketValeu: 117, CEO: "Brian Krzanich", foundedOn:1968 },
+    { name: "Facebook", marketValeu: 383, CEO: "Mark Zuckerberg", foundedOn:2004 },
+    { name: "Spotify", marketValeu: 50, CEO: "Daniel Ek", foundedOn:2006 },
+    { name: "Apple", marketValeu: 245, CEO: "Tim Cook", foundedOn:1976 }
 ]
 
 const companiesFilter = companies.filter(company => {
-    if (company.marketValeu < 200 && company.foundeOn > 1990) return true
+    if (company.marketValeu < 200 && company.foundedOn > 1990) return true
 } )
 
 console.log(companiesFilter)
+
+console.log("Missão")
+
+// missão 
+/*
+Adcionar 10% de valor de mercado a todas as companhias -> MAP
+Filtrar somente companhias fundados abaixo de 190 - FILTER
+Somar o valor de mercado das restantes -> REDUCE
+*/
+
+const marketValueOldCompanies = companies
+  .map(company => ({
+    ...company,
+    marketValue: company.marketValue + (company.marketValue / 10) // Corrigido o nome da propriedade
+  }))
+  .filter(company => company.foundedOn < 1990) // Corrigido o nome da propriedade
+  .reduce((acc, company) => acc + company.marketValue, 0);
+
+console.log(marketValueOldCompanies);
